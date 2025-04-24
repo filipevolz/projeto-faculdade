@@ -16,14 +16,31 @@ const pool = new Pool({
 app.use(cors()) // <-- habilita o CORS
 app.use(express.json())
 
-// Endpoint para listar as denúncias
-app.get('/', async (req, res) => {
+app.post('/denuncias', async (req, res) => {
+  const { nome, email, cep, endereco, numero, complemento, descricao } =
+    req.body
+
+  if (!nome || !email || !cep || !endereco || !numero || !descricao) {
+    return res
+      .status(400)
+      .json({ error: 'Campos obrigatórios estão faltando.' })
+  }
+
   try {
-    const { rows } = await pool.query('SELECT * FROM books_to_read;')
-    res.json(rows)
-  } catch (error) {
-    console.error('Failed to fetch books', error)
-    res.status(500).json({ error: 'Internal Server Error' })
+    const result = await pool.query(
+      `INSERT INTO denuncias (nome, email, cep, endereco, numero, complemento, descricao)
+       VALUES ($1, $2, $3, $4, $5, $6, $7)
+       RETURNING uuid, created_at`,
+      [nome, email, cep, endereco, numero, complemento, descricao],
+    )
+
+    res.status(201).json({
+      message: 'Denúncia registrada com sucesso!',
+      data: result.rows[0],
+    })
+  } catch (err) {
+    console.error(err)
+    res.status(500).json({ error: 'Erro ao registrar denúncia.' })
   }
 })
 

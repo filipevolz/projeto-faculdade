@@ -12,28 +12,28 @@ import { Box, Button, Progress, Text } from '@radix-ui/themes'
 import { ArrowRight } from 'phosphor-react'
 import { useNavigate } from 'react-router-dom'
 
-const createReportSchema = z.object({
+const createReportInfoSchema = z.object({
   name: z
     .string()
     .min(3, { message: 'O nome precisa ter pelo menos 3 letras.' }),
   email: z.string().email({ message: 'Email é obrigatório.' }),
 })
 
-export type CreateReportFormData = z.infer<typeof createReportSchema>
+export type CreateReportInfoFormData = z.infer<typeof createReportInfoSchema>
 
 export function ReportPage() {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<CreateReportFormData>({
-    resolver: zodResolver(createReportSchema),
+  } = useForm<CreateReportInfoFormData>({
+    resolver: zodResolver(createReportInfoSchema),
   })
 
   const navigate = useNavigate()
 
-  async function handleCreateReport(data: CreateReportFormData) {
-    console.log(data)
+  async function handleCreateReport(data: CreateReportInfoFormData) {
+    localStorage.setItem('reportStep1', JSON.stringify(data))
     await navigate('/denunciar/endereco')
   }
 
