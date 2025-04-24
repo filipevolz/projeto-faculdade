@@ -12,7 +12,7 @@ import { Box, Button, Progress, Text, TextArea } from '@radix-ui/themes'
 import axios from 'axios'
 
 const createReportSchema = z.object({
-  descripton: z.string().min(10, {
+  description: z.string().min(10, {
     message:
       'O preenchimento é obrigatório da descrição para entender melhor o problema que está passando.',
   }),
@@ -34,20 +34,23 @@ export function Description() {
     const step2 = JSON.parse(localStorage.getItem('reportStep2') || '{}')
 
     const fullReport = {
-      ...step1,
-      ...step2,
-      description: data.descripton,
+      nome: step1.name,
+      email: step1.email,
+      cep: step2.cep,
+      endereco: step2.street,
+      numero: step2.number,
+      complemento: step2.complement,
+      descricao: data.description,
     }
 
     try {
       await axios.post(
-        'https://projeto-faculdade-nwhu.onrender.com',
+        'https://projeto-faculdade-nwhu.onrender.com/denuncias',
         fullReport,
       )
-      // Limpa localStorage se quiser
       localStorage.removeItem('reportStep1')
       localStorage.removeItem('reportStep2')
-      // Redireciona ou mostra mensagem de sucesso
+      // redireciona ou avisa sucesso
     } catch (error) {
       console.error('Erro ao enviar denúncia:', error)
     }
@@ -69,13 +72,13 @@ export function Description() {
         <InputForm>
           <Text>Descrição</Text>
           <TextArea
-            {...register('descripton')}
+            {...register('description')}
             size="3"
             color="gray"
             style={{ height: '400px' }}
           />
-          {errors.descripton && (
-            <FormError size="2">{errors.descripton.message}</FormError>
+          {errors.description && (
+            <FormError size="2">{errors.description.message}</FormError>
           )}
         </InputForm>
         <Button radius="medium" color="purple" size="3" type="submit">
