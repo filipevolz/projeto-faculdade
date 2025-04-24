@@ -5,7 +5,7 @@ import { ChatCircleText, ShieldCheck, Handshake } from 'phosphor-react'
 export function About() {
   return (
     <AboutContainer id="sobre">
-      <Heading size="8" color="crimson" mb="4">
+      <Heading size="8" color="purple" mb="4">
         Quem somos
       </Heading>
       <Text size="4" as="p" mb="4">

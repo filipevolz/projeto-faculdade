@@ -11,7 +11,7 @@ import {
 export function Report() {
   return (
     <ReportContainer id="denunciar">
-      <Heading size="8" color="crimson" mb="4">
+      <Heading size="8" color="purple" mb="4">
         Denunciar é um ato de coragem
       </Heading>
       <Text size="4" as="p" mb="4">

@@ -33,6 +33,7 @@ export function ReportPage() {
   const navigate = useNavigate()
 
   async function handleCreateReport(data: CreateReportInfoFormData) {
+    localStorage.removeItem('reportStep1')
     localStorage.setItem('reportStep1', JSON.stringify(data))
     await navigate('/denunciar/endereco')
   }

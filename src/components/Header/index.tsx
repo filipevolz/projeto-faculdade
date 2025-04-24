@@ -29,7 +29,7 @@ export function Header() {
       </Logo>
 
       {pathname === '/' && (
-        <TabNav.Root color="crimson" highContrast>
+        <TabNav.Root color="purple" highContrast>
           <TabNav.Link asChild active={hash === ''}>
             <a href="/">Home</a>
           </TabNav.Link>
@@ -41,6 +41,9 @@ export function Header() {
           </TabNav.Link>
           <TabNav.Link asChild active={hash === '#denunciar'}>
             <a href="#denunciar">Denunciar</a>
+          </TabNav.Link>
+          <TabNav.Link asChild>
+            <a href="/account/login">Login</a>
           </TabNav.Link>
         </TabNav.Root>
       )}

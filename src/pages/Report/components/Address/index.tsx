@@ -65,6 +65,8 @@ export function Address() {
   const navigate = useNavigate()
 
   async function handleCreateAddressReport(data: CreateReportAddressFormData) {
+    localStorage.removeItem('reportStep2')
+
     localStorage.setItem('reportStep2', JSON.stringify(data))
     await navigate('/denunciar/endereco/descricao')
   }

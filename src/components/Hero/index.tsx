@@ -11,7 +11,7 @@ export function Hero() {
         <Text
           size="9"
           highContrast
-          color="crimson"
+          color="purple"
           style={{ textTransform: 'uppercase' }}
         >
           informação, apoio e coragem

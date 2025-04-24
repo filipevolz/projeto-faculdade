@@ -10,7 +10,7 @@ import { EnvelopeSimple, PhoneCall, InstagramLogo } from 'phosphor-react'
 export function Contact() {
   return (
     <ContactContainer id="contato">
-      <Heading size="8" color="crimson" mb="4">
+      <Heading size="8" color="purple" mb="4">
         Fale conosco
       </Heading>
 
