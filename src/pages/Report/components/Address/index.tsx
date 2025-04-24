@@ -65,8 +65,14 @@ export function Address() {
   const navigate = useNavigate()
 
   async function handleCreateAddressReport(data: CreateReportAddressFormData) {
-    console.log(data)
-    await navigate('/denunciar/endereco/descricao')
+    const response = await axios.get(
+      'https://projeto-faculdade-nwhu.onrender.com',
+    )
+
+    console.log(response)
+
+    // console.log(data)
+    // await navigate('/denunciar/endereco/descricao')
   }
 
   return (

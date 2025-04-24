@@ -13,22 +13,18 @@ const pool = new Pool({
 
 app.use(express.json())
 
-// Endpoint para cadastrar uma denúncia
-app.post('/denuncias', async (req, res) => {
-  const { titulo, descricao } = req.body
-  const result = await pool.query(
-    'INSERT INTO denuncias (titulo, descricao) VALUES ($1, $2) RETURNING *',
-    [titulo, descricao],
-  )
-  res.status(201).json(result.rows[0])
-})
-
 // Endpoint para listar as denúncias
-app.get('/denuncias', async (req, res) => {
-  const result = await pool.query('SELECT * FROM denuncias')
-  res.json(result.rows)
+app.get('/', async (req, res) => {
+  try {
+    // Fetch books from your database using the postgres connection
+    const { rows } = await pool.query('SELECT * FROM books_to_read;')
+    res.json(rows)
+  } catch (error) {
+    console.error('Failed to fetch books', error)
+    res.status(500).json({ error: 'Internal Server Error' })
+  }
 })
 
 app.listen(port, () => {
-  console.log(`Servidor rodando na porta ${port}`)
+  console.log(`Server running on http://localhost:${port}`)
 })
