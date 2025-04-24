@@ -1,4 +1,5 @@
 const express = require('express')
+const cors = require('cors') // <-- importe o CORS
 const { Pool } = require('pg')
 const dotenv = require('dotenv')
 
@@ -11,12 +12,13 @@ const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
 })
 
+// Ativa o CORS para todas as origens (pode restringir se quiser)
+app.use(cors()) // <-- habilita o CORS
 app.use(express.json())
 
 // Endpoint para listar as denúncias
 app.get('/', async (req, res) => {
   try {
-    // Fetch books from your database using the postgres connection
     const { rows } = await pool.query('SELECT * FROM books_to_read;')
     res.json(rows)
   } catch (error) {
