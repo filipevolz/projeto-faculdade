@@ -6,6 +6,7 @@ import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
+import { useState } from 'react'
 
 const loginSchema = z.object({
   email: z
@@ -24,22 +25,29 @@ export function Login() {
   } = useForm<LoginSchemaFormData>({
     resolver: zodResolver(loginSchema),
   })
+  const [isLoading, setIsLoading] = useState(false)
 
   const navigate = useNavigate()
 
   async function handleLogin(data: LoginSchemaFormData) {
+    setIsLoading(true)
     const user = {
       email: data.email,
       password: data.password,
     }
 
     try {
-      await axios.post('https://projeto-faculdade-nwhu.onrender.com/login', user, {
-        withCredentials: true,
-      })
+      const response = await axios.post('https://projeto-faculdade-nwhu.onrender.com/login', user)
+
+      // Pega o token da resposta
+      const token = response.data.token
+      localStorage.setItem('token', token) // Armazena no localStorage
+
       navigate('/dashboard')
     } catch (error) {
       console.error('Erro ao fazer login:', error)
+    } finally {
+      setIsLoading(false)
     }
   }
 
@@ -70,10 +78,11 @@ export function Login() {
             size="3"
             type="submit"
             variant="surface"
+            disabled={isLoading}
           >
             <a href="/account/register">Registrar-se</a>
           </Button>
-          <Button radius="medium" color="purple" size="3" type="submit">
+          <Button radius="medium" color="purple" size="3" type="submit" disabled={isLoading}>
             Login
           </Button>
         </ButtonsForm>

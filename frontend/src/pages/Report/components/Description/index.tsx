@@ -31,7 +31,8 @@ export function Description() {
   } = useForm<CreateReportFormData>({
     resolver: zodResolver(createReportSchema),
   })
-  const [ messageSuccess, setMessageSuccess ] = useState('')
+  const [messageSuccess, setMessageSuccess] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
 
   const navigate = useNavigate()
 
@@ -50,11 +51,13 @@ export function Description() {
     }
 
     try {
+      setIsLoading(true)
       setMessageSuccess('')
       await axios.post(
         'https://projeto-faculdade-nwhu.onrender.com/reports',
         fullReport,
       )
+      setIsLoading(false)
       localStorage.removeItem('reportStep1')
       localStorage.removeItem('reportStep2')
       setMessageSuccess("Denúncia criada com sucesso!")
@@ -91,7 +94,7 @@ export function Description() {
             <FormError size="2">{errors.description.message}</FormError>
           )}
         </InputForm>
-        <Button radius="medium" color="purple" size="3" type="submit">
+        <Button radius="medium" color="purple" size="3" type="submit" disabled={isLoading}>
           Registrar denúncia
         </Button>
         <SuccessMessage>{messageSuccess}</SuccessMessage>

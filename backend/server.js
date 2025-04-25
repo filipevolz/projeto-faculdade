@@ -95,14 +95,11 @@ app.post('/login', async (req, res) => {
       },
     )
 
-    res
-      .cookie('token', token, {
-        httpOnly: true, // Não acessível via JavaScript (mais seguro)
-        secure: true, // Coloque `true` em produção com HTTPS
-        sameSite: 'none',
-        maxAge: 60 * 60 * 1000, // 1 hora
-      })
-      .json({ message: 'Login realizado com sucesso!' })
+    res.json({
+      message: 'Login realizado com sucesso!',
+      token,
+    })
+
   } catch (err) {
     console.error('Erro ao realizar login:', err)
     res.status(500).json({ error: 'Erro interno do servidor.' })
@@ -209,7 +206,8 @@ app.get('/reports/:uuid', async (req, res) => {
 })
 
 app.get('/auth/validate', (req, res) => {
-  const token = req.cookies.token
+  const authHeader = req.headers.authorization
+  const token = authHeader && authHeader.split(' ')[1]
 
   if (!token) {
     return res.status(401).json({ authenticated: false })

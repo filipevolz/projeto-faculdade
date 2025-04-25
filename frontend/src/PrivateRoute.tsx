@@ -7,7 +7,9 @@ export function PrivateRoute() {
     queryKey: ['auth-check'],
     queryFn: async () => {
       const response = await axios.get('https://projeto-faculdade-nwhu.onrender.com/auth/validate', {
-        withCredentials: true, // importante para enviar cookies
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
       })
       return response.data
     },

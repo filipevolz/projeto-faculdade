@@ -22,5 +22,9 @@ export const ButtonsForm = styled.div`
 
   button {
     cursor: pointer;
+
+    &:disabled {
+      cursor: not-allowed;
+    }
   }
 `
