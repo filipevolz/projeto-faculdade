@@ -34,7 +34,7 @@ export function Login() {
     }
 
     try {
-      await axios.post('https://projeto-faculdade-nwhu.onrender.com0/login', user, {
+      await axios.post('https://projeto-faculdade-nwhu.onrender.com/login', user, {
         withCredentials: true,
       })
       navigate('/dashboard')
