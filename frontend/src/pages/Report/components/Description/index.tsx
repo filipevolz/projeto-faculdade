@@ -10,6 +10,8 @@ import {
 } from '../../styles'
 import { Box, Button, Progress, Text, TextArea } from '@radix-ui/themes'
 import axios from 'axios'
+import { useState } from 'react'
+import { SuccessMessage } from './styles'
 
 const createReportSchema = z.object({
   description: z.string().min(10, {
@@ -28,6 +30,7 @@ export function Description() {
   } = useForm<CreateReportFormData>({
     resolver: zodResolver(createReportSchema),
   })
+  const [ messageSuccess, setMessageSuccess ] = useState('')
 
   async function handleCreateReport(data: CreateReportFormData) {
     const step1 = JSON.parse(localStorage.getItem('reportStep1') || '{}')
@@ -44,13 +47,14 @@ export function Description() {
     }
 
     try {
+      setMessageSuccess('')
       await axios.post(
         'https://projeto-faculdade-nwhu.onrender.com/denuncias',
         fullReport,
       )
       localStorage.removeItem('reportStep1')
       localStorage.removeItem('reportStep2')
-      // redireciona ou avisa sucesso
+      setMessageSuccess("Denúncia criada com sucesso!")
     } catch (error) {
       console.error('Erro ao enviar denúncia:', error)
     }
@@ -84,6 +88,7 @@ export function Description() {
         <Button radius="medium" color="purple" size="3" type="submit">
           Registrar denúncia
         </Button>
+        <SuccessMessage>{messageSuccess}</SuccessMessage>
       </FormContainer>
     </ReportPageContainer>
   )

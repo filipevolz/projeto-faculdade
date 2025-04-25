@@ -8,6 +8,8 @@ import { Login } from './pages/Login'
 import { AccountLayout } from './layouts/AccountLayout'
 import { Register } from './pages/Register'
 import { Dashboard } from './pages/Dashboard'
+import { ReportDetails } from './pages/Dashboard/components/ReportDetails'
+import { PrivateRoute } from './PrivateRoute'
 
 export function Router() {
   return (
@@ -22,7 +24,10 @@ export function Router() {
         <Route path="/account/login" element={<Login />} />
         <Route path="/account/register" element={<Register />} />
       </Route>
-      <Route path="/dashboard" element={<Dashboard />} />
+      <Route element={<PrivateRoute />}>
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/report/:uuid" element={<ReportDetails />} />
+      </Route>
     </Routes>
   )
 }

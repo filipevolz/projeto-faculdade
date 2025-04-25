@@ -34,7 +34,7 @@ export function Register() {
 
     try {
       const response = await axios.post(
-        'http://localhost:3000/register',
+        'https://projeto-faculdade-nwhu.onrender.com/register',
         newUser,
       )
       console.log(response)

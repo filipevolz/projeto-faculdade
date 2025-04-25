@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 
 const loginSchema = z.object({
   email: z
@@ -24,6 +25,8 @@ export function Login() {
     resolver: zodResolver(loginSchema),
   })
 
+  const navigate = useNavigate()
+
   async function handleLogin(data: LoginSchemaFormData) {
     const user = {
       email: data.email,
@@ -31,10 +34,10 @@ export function Login() {
     }
 
     try {
-      const response = await axios.post('http://localhost:3000/login', user, {
+      await axios.post('https://projeto-faculdade-nwhu.onrender.com0/login', user, {
         withCredentials: true,
       })
-      console.log(response)
+      navigate('/dashboard')
     } catch (error) {
       console.error('Erro ao fazer login:', error)
     }

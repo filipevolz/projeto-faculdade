@@ -136,6 +136,94 @@ app.post('/denuncias', async (req, res) => {
   }
 })
 
+app.get('/reports', async (req, res) => {
+  try {
+    // Pegue o número da página e a quantidade de itens por página a partir dos parâmetros da query
+    const page = parseInt(req.query.page) || 1  // Pega o número da página, se não for passado, assume a página 1
+    const perPage = parseInt(req.query.per_page) || 10  // Pega a quantidade de itens por página, se não for passado, assume 12
+
+    // Pega o termo de busca (se existir)
+    const searchTerm = req.query.q || ''
+
+    // Calcula o offset com base na página
+    const offset = (page - 1) * perPage
+
+    // Consulta SQL com LIMIT, OFFSET e pesquisa (se houver)
+    const result = await pool.query(
+      `
+        SELECT * 
+        FROM denuncias 
+        WHERE 
+          LOWER(nome) LIKE LOWER($1) 
+          OR LOWER(email) LIKE LOWER($1) 
+          OR LOWER(descricao) LIKE LOWER($1)
+        ORDER BY created_at DESC 
+        LIMIT $2 OFFSET $3
+      `,
+      [`%${searchTerm}%`, perPage, offset]
+    )
+
+    // Consulta para contar o total de registros, levando em consideração a pesquisa (se houver)
+    const totalResult = await pool.query(
+      `
+        SELECT COUNT(*) 
+        FROM denuncias 
+        WHERE 
+          LOWER(nome) LIKE LOWER($1) 
+          OR LOWER(email) LIKE LOWER($1) 
+          OR LOWER(descricao) LIKE LOWER($1)
+      `,
+      [`%${searchTerm}%`]
+    )
+    const totalCount = totalResult.rows[0].count
+
+    // Envia a resposta com os dados e o total de registros
+    res.status(200).json({
+      data: result.rows,
+      totalCount: totalCount,
+    })
+  } catch (err) {
+    console.error('Erro ao buscar denúncias:', err)
+    res.status(500).json({ error: 'Erro ao buscar denúncias.' })
+  }
+})
+
+app.get('/reports/:uuid', async (req, res) => {
+  const { uuid } = req.params
+
+  try {
+    const result = await pool.query(
+      `SELECT * FROM denuncias WHERE uuid = $1`,
+      [uuid]
+    )
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({ error: 'Denúncia não encontrada.' })
+    }
+
+    res.status(200).json(result.rows[0])
+  } catch (err) {
+    console.error('Erro ao buscar denúncia por UUID:', err)
+    res.status(500).json({ error: 'Erro ao buscar denúncia.' })
+  }
+})
+
+app.get('/auth/validate', (req, res) => {
+  const token = req.cookies.token
+
+  if (!token) {
+    return res.status(401).json({ authenticated: false })
+  }
+
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET)
+    return res.status(200).json({ authenticated: true, user: decoded })
+  } catch (err) {
+    return res.status(401).json({ authenticated: false })
+  }
+})
+
+
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`)
 })
