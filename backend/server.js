@@ -99,7 +99,7 @@ app.post('/login', async (req, res) => {
       .cookie('token', token, {
         httpOnly: true, // Não acessível via JavaScript (mais seguro)
         secure: true, // Coloque `true` em produção com HTTPS
-        sameSite: 'strict',
+        sameSite: 'none',
         maxAge: 60 * 60 * 1000, // 1 hora
       })
       .json({ message: 'Login realizado com sucesso!' })
