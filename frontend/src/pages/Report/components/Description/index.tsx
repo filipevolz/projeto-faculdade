@@ -12,6 +12,7 @@ import { Box, Button, Progress, Text, TextArea } from '@radix-ui/themes'
 import axios from 'axios'
 import { useState } from 'react'
 import { SuccessMessage } from './styles'
+import { useNavigate } from 'react-router-dom'
 
 const createReportSchema = z.object({
   description: z.string().min(10, {
@@ -32,6 +33,8 @@ export function Description() {
   })
   const [ messageSuccess, setMessageSuccess ] = useState('')
 
+  const navigate = useNavigate()
+
   async function handleCreateReport(data: CreateReportFormData) {
     const step1 = JSON.parse(localStorage.getItem('reportStep1') || '{}')
     const step2 = JSON.parse(localStorage.getItem('reportStep2') || '{}')
@@ -49,12 +52,15 @@ export function Description() {
     try {
       setMessageSuccess('')
       await axios.post(
-        'https://projeto-faculdade-nwhu.onrender.com/denuncias',
+        'https://projeto-faculdade-nwhu.onrender.com/reports',
         fullReport,
       )
       localStorage.removeItem('reportStep1')
       localStorage.removeItem('reportStep2')
       setMessageSuccess("Denúncia criada com sucesso!")
+      setTimeout(() => {
+        navigate('/')
+      }, 3000)
     } catch (error) {
       console.error('Erro ao enviar denúncia:', error)
     }

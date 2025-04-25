@@ -108,7 +108,7 @@ app.post('/login', async (req, res) => {
     res.status(500).json({ error: 'Erro interno do servidor.' })
   }
 })
-app.post('/denuncias', async (req, res) => {
+app.post('/reports', async (req, res) => {
   const { nome, email, cep, endereco, numero, complemento, descricao } =
     req.body
 
