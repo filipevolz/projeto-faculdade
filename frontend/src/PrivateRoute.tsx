@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query'
 import axios from 'axios'
 
 export function PrivateRoute() {
-  const { data, isLoading } = useQuery({
+  const { data } = useQuery({
     queryKey: ['auth-check'],
     queryFn: async () => {
       const response = await axios.get('https://projeto-faculdade-nwhu.onrender.com/auth/validate', {
@@ -13,11 +13,6 @@ export function PrivateRoute() {
     },
     retry: false,
   })
-
-  if (isLoading) {
-    return <p>Carregando...</p> // pode trocar por skeleton ou spinner
-  }
-
   if (!data?.authenticated) {
     return <Navigate to="/account/login" replace />
   }
