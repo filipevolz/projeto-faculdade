@@ -98,7 +98,7 @@ app.post('/login', async (req, res) => {
     res
       .cookie('token', token, {
         httpOnly: true, // Não acessível via JavaScript (mais seguro)
-        secure: false, // Coloque `true` em produção com HTTPS
+        secure: true, // Coloque `true` em produção com HTTPS
         sameSite: 'strict',
         maxAge: 60 * 60 * 1000, // 1 hora
       })
