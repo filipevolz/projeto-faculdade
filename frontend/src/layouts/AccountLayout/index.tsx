@@ -9,7 +9,7 @@ export function AccountLayout() {
     <>
       <HeaderContainer>
         <Button color="purple" asChild>
-          <a href="/">
+          <a href="/projeto-faculdade">
             <ArrowLeft size={24} /> Retornar
           </a>
         </Button>
