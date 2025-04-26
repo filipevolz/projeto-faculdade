@@ -20,7 +20,7 @@ export function Header() {
   return (
     <HeaderContainer
       style={{
-        justifyContent: pathname !== '/projeto-faculdade' ? 'center' : 'justify-between',
+        justifyContent: pathname !== '/projeto-faculdade/' ? 'center' : 'justify-between',
       }}
     >
       <Logo>
