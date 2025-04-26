@@ -75,7 +75,7 @@ export function Login() {
         <Button radius="medium" color="purple" size="3" type="submit" disabled={isLoading}>
           Login
         </Button>
-        {loginErrorMessage !== '' ? <span>{loginErrorMessage}</span> : null}
+        {loginErrorMessage !== '' ? <FormError>{loginErrorMessage}</FormError> : null}
       </LoginForm>
     </LoginPageContainer>
   )
