@@ -6,7 +6,6 @@ import { Address } from './pages/Report/components/Address'
 import { Description } from './pages/Report/components/Description'
 import { Login } from './pages/Login'
 import { AccountLayout } from './layouts/AccountLayout'
-import { Register } from './pages/Register'
 import { Dashboard } from './pages/Dashboard'
 import { ReportDetails } from './pages/Dashboard/components/ReportDetails'
 import { PrivateRoute } from './PrivateRoute'
@@ -20,9 +19,8 @@ export function Router() {
         <Route path="/denunciar/endereco" element={<Address />} />
         <Route path="/denunciar/endereco/descricao" element={<Description />} />
       </Route>
-      <Route path="/account" element={<AccountLayout />}>
-        <Route path="/account/login" element={<Login />} />
-        <Route path="/account/register" element={<Register />} />
+      <Route path="/login" element={<AccountLayout />}>
+        <Route path="/login" element={<Login />} />
       </Route>
       <Route element={<PrivateRoute />}>
         <Route path="/dashboard" element={<Dashboard />} />

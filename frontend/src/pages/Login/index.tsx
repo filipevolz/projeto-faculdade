@@ -1,6 +1,6 @@
 import { Button, Text } from '@radix-ui/themes'
 import { FormError, InputForm } from '../Report/styles'
-import { ButtonsForm, LoginForm, LoginPageContainer } from './styles'
+import { LoginForm, LoginPageContainer } from './styles'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -69,22 +69,9 @@ export function Login() {
             <FormError size="2">{errors.password.message}</FormError>
           )}
         </InputForm>
-        <ButtonsForm>
-          <Button
-            asChild
-            radius="medium"
-            color="purple"
-            size="3"
-            type="submit"
-            variant="surface"
-            disabled={isLoading}
-          >
-            <a href="/account/register">Registrar-se</a>
-          </Button>
-          <Button radius="medium" color="purple" size="3" type="submit" disabled={isLoading}>
-            Login
-          </Button>
-        </ButtonsForm>
+        <Button radius="medium" color="purple" size="3" type="submit" disabled={isLoading}>
+          Login
+        </Button>
       </LoginForm>
     </LoginPageContainer>
   )

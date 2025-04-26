@@ -14,17 +14,3 @@ export const LoginForm = styled(FormContainer)`
     color: ${(props) => props.theme.white};
   }
 `
-
-export const ButtonsForm = styled.div`
-  display: flex;
-  gap: 0.5rem;
-  justify-content: flex-end;
-
-  button {
-    cursor: pointer;
-
-    &:disabled {
-      cursor: not-allowed;
-    }
-  }
-`

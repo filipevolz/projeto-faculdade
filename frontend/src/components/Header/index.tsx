@@ -43,7 +43,7 @@ export function Header() {
             <a href="#denunciar">Denunciar</a>
           </TabNav.Link>
           <TabNav.Link asChild>
-            <a href="/account/login">Login</a>
+            <a href="/login">Login</a>
           </TabNav.Link>
         </TabNav.Root>
       )}
