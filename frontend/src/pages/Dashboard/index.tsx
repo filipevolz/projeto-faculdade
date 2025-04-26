@@ -128,7 +128,7 @@ export function Dashboard() {
     <Table.Cell>{report.complemento}</Table.Cell>
     <Table.Cell>
       <Button asChild>
-        <Link href={`/report/${report.uuid}`} color='purple'>
+        <Link href={`/projeto-faculdade/report/${report.uuid}`} color='purple'>
           Ver detalhes
           <ArrowRight size={16} />
         </Link>
