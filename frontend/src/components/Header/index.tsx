@@ -30,7 +30,7 @@ export function Header() {
         </span>
       </Logo>
 
-      {pathname === '/projeto-faculdade' && (
+      {pathname === '/projeto-faculdade/' && (
         <TabNav.Root color="purple" highContrast>
           <TabNav.Link asChild active={hash === ''}>
             <a href="/projeto-faculdade">Home</a>
