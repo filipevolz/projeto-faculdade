@@ -4,9 +4,9 @@ import { ButtonsForm, LoginForm, LoginPageContainer } from './styles'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
-import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
+import api from '../../lib/api'
 
 const loginSchema = z.object({
   email: z
@@ -37,11 +37,10 @@ export function Login() {
     }
 
     try {
-      const response = await axios.post('https://projeto-faculdade-nwhu.onrender.com/login', user)
+      const response = await api.post('https://projeto-faculdade-nwhu.onrender.com/login', user)
 
-      // Pega o token da resposta
       const token = response.data.token
-      localStorage.setItem('token', token) // Armazena no localStorage
+      localStorage.setItem('token', token)
 
       navigate('/dashboard')
     } catch (error) {

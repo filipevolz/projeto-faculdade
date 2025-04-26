@@ -1,22 +1,19 @@
 import { Navigate, Outlet } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
-import axios from 'axios'
+import api from './lib/api'
 
 export function PrivateRoute() {
   const { data } = useQuery({
     queryKey: ['auth-check'],
     queryFn: async () => {
-      const response = await axios.get('https://projeto-faculdade-nwhu.onrender.com/auth/validate', {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('token')}`,
-        },
-      })
+      const response = await api.get('https://projeto-faculdade-nwhu.onrender.com/auth/validate')
+      console.log(response.data)
       return response.data
     },
     retry: false,
   })
-  if (!data?.authenticated) {
-    return <Navigate to="/account/login" replace />
+  if (data?.authenticated === false) {
+    return <Navigate to="/account/login" />
   }
 
   return <Outlet />

@@ -1,10 +1,10 @@
 import { useParams } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
-import axios from 'axios'
 import styled from 'styled-components'
 import { Skeleton } from '@radix-ui/themes'
 import { DashboardHeader } from '../../styles'
 import { Logo, LogoIcon } from '../../../../components/Header/styles'
+import api from '../../../../lib/api'
 
 const Container = styled.div`
   padding: 2rem 4rem;
@@ -40,7 +40,7 @@ export function ReportDetails() {
   const { data: report, isLoading } = useQuery({
     queryKey: ['report-details', uuid],
     queryFn: async () => {
-      const response = await axios.get(`https://projeto-faculdade-nwhu.onrender.com/reports/${uuid}`)
+      const response = await api.get(`https://projeto-faculdade-nwhu.onrender.com/reports/${uuid}`)
       return response.data
     },
     enabled: !!uuid,

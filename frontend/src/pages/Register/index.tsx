@@ -4,7 +4,7 @@ import { RegisterForm, RegisterPageContainer } from './styles'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
-import axios from 'axios'
+import api from '../../lib/api'
 
 const registerSchema = z.object({
   name: z.string().min(3, { message: 'Nome é obrigatório' }),
@@ -33,7 +33,7 @@ export function Register() {
     }
 
     try {
-      const response = await axios.post(
+      const response = await api.post(
         'https://projeto-faculdade-nwhu.onrender.com/register',
         newUser,
       )

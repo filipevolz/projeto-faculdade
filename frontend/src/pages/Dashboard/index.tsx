@@ -3,11 +3,11 @@ import { Logo, LogoIcon } from '../../components/Header/styles'
 import { DashboardContainer, DashboardHeader, TableContainer } from './styles'
 import { ArrowRight, MagnifyingGlass } from 'phosphor-react'
 import { keepPreviousData, useQuery } from '@tanstack/react-query'
-import axios from 'axios'
 import { useState } from 'react'
 import { Pagination } from './components/Pagination'
 import { useSearchParams } from 'react-router-dom'
 import { useDebounce } from 'use-debounce'
+import api from '../../lib/api'
 
 export interface ReportResponse {
   data: Report[]
@@ -38,7 +38,7 @@ export function Dashboard() {
   const { data: reportsResponse, isLoading } = useQuery<ReportResponse>({
     queryKey: ['get-reports', page, searchTerm],
     queryFn: async () => {
-      const response = await axios.get('https://projeto-faculdade-nwhu.onrender.com/reports', {
+      const response = await api.get('https://projeto-faculdade-nwhu.onrender.com/reports', {
         params: {
           page,
           per_page: perPage,

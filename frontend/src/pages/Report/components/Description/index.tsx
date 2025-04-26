@@ -9,10 +9,10 @@ import {
   FormError,
 } from '../../styles'
 import { Box, Button, Progress, Text, TextArea } from '@radix-ui/themes'
-import axios from 'axios'
 import { useState } from 'react'
 import { SuccessMessage } from './styles'
 import { useNavigate } from 'react-router-dom'
+import api from '../../../../lib/api'
 
 const createReportSchema = z.object({
   description: z.string().min(10, {
@@ -53,7 +53,7 @@ export function Description() {
     try {
       setIsLoading(true)
       setMessageSuccess('')
-      await axios.post(
+      await api.post(
         'https://projeto-faculdade-nwhu.onrender.com/reports',
         fullReport,
       )

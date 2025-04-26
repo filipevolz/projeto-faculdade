@@ -12,7 +12,7 @@ import { Box, Button, Progress, Text } from '@radix-ui/themes'
 import { ArrowRight } from 'phosphor-react'
 import { useNavigate } from 'react-router-dom'
 import { useEffect } from 'react'
-import axios from 'axios'
+import api from '../../../../lib/api'
 
 const createReportAddressSchema = z.object({
   cep: z.string().min(8, 'CEP é obrigatório').max(9),
@@ -39,7 +39,7 @@ export function Address() {
   const cep = watch('cep')
 
   async function getAddress(zipCode: string) {
-    const response = await axios.get(
+    const response = await api.get(
       `https://viacep.com.br/ws/${zipCode}/json/`,
     )
     const data = response.data
