@@ -20,7 +20,7 @@ export function Header() {
   return (
     <HeaderContainer
       style={{
-        justifyContent: pathname !== '/projeto-faculdade/' ? 'center' : 'justify-between',
+        justifyContent: pathname !== '/projeto-faculdade/' || '/projeto-faculdade' ? 'center' : 'justify-between',
       }}
     >
       <Logo>
@@ -30,7 +30,7 @@ export function Header() {
         </span>
       </Logo>
 
-      {pathname === '/projeto-faculdade/' && (
+      {(pathname === '/projeto-faculdade/' || '/projeto-faculdade') && (
         <TabNav.Root color="purple" highContrast>
           <TabNav.Link asChild active={hash === ''}>
             <a href="/projeto-faculdade">Home</a>
