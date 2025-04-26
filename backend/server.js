@@ -18,7 +18,7 @@ const pool = new Pool({
 // Ativa o CORS para todas as origens (pode restringir se quiser)
 app.use(
   cors({
-    origin: 'http://localhost:5173',
+    origin: 'https://filipevolz.github.io/projeto-faculdade',
     credentials: true,
   }),
 ) // <-- habilita o CORS
