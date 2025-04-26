@@ -26,10 +26,12 @@ export function Login() {
     resolver: zodResolver(loginSchema),
   })
   const [isLoading, setIsLoading] = useState(false)
+  const [loginErrorMessage, setLoginErrorMessage] = useState('')
 
   const navigate = useNavigate()
 
   async function handleLogin(data: LoginSchemaFormData) {
+    setLoginErrorMessage('')
     setIsLoading(true)
     const user = {
       email: data.email,
@@ -44,6 +46,7 @@ export function Login() {
 
       navigate('/projeto-faculdade/dashboard')
     } catch (error) {
+      setLoginErrorMessage((error as any)?.response?.data?.error);
       console.error('Erro ao fazer login:', error)
     } finally {
       setIsLoading(false)
@@ -64,7 +67,7 @@ export function Login() {
         </InputForm>
         <InputForm>
           <Text>Senha</Text>
-          <input type="text" {...register('password')} />
+          <input type="password" {...register('password')} />
           {errors.password && (
             <FormError size="2">{errors.password.message}</FormError>
           )}
@@ -72,6 +75,7 @@ export function Login() {
         <Button radius="medium" color="purple" size="3" type="submit" disabled={isLoading}>
           Login
         </Button>
+        {loginErrorMessage !== '' ? <span>{loginErrorMessage}</span> : null}
       </LoginForm>
     </LoginPageContainer>
   )
