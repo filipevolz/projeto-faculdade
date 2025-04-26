@@ -35,7 +35,7 @@ export function ReportPage() {
   async function handleCreateReport(data: CreateReportInfoFormData) {
     localStorage.removeItem('reportStep1')
     localStorage.setItem('reportStep1', JSON.stringify(data))
-    await navigate('/denunciar/endereco')
+    await navigate('/projeto-faculdade/denunciar/endereco')
   }
 
   return (

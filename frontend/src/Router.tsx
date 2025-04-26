@@ -13,18 +13,18 @@ import { PrivateRoute } from './PrivateRoute'
 export function Router() {
   return (
     <Routes>
-      <Route path="/" element={<DefaultLayout />}>
-        <Route path="/" element={<Home />} />
-        <Route path="/denunciar" element={<ReportPage />} />
-        <Route path="/denunciar/endereco" element={<Address />} />
-        <Route path="/denunciar/endereco/descricao" element={<Description />} />
+      <Route path="/projeto-faculdade" element={<DefaultLayout />}>
+        <Route path="/projeto-faculdade" element={<Home />} />
+        <Route path="/projeto-faculdade/denunciar" element={<ReportPage />} />
+        <Route path="/projeto-faculdade/denunciar/endereco" element={<Address />} />
+        <Route path="/projeto-faculdade/denunciar/endereco/descricao" element={<Description />} />
       </Route>
-      <Route path="/login" element={<AccountLayout />}>
-        <Route path="/login" element={<Login />} />
+      <Route path="/projeto-faculdade/login" element={<AccountLayout />}>
+        <Route path="/projeto-faculdade/login" element={<Login />} />
       </Route>
       <Route element={<PrivateRoute />}>
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/report/:uuid" element={<ReportDetails />} />
+        <Route path="/projeto-faculdade/dashboard" element={<Dashboard />} />
+        <Route path="/projeto-faculdade/report/:uuid" element={<ReportDetails />} />
       </Route>
     </Routes>
   )

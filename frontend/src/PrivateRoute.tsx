@@ -12,7 +12,7 @@ export function PrivateRoute() {
     retry: false,
   })
   if (data?.authenticated === false) {
-    return <Navigate to="/login" />
+    return <Navigate to="/projeto-faculdade/login" />
   }
 
   return <Outlet />

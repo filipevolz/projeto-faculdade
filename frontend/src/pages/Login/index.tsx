@@ -42,7 +42,7 @@ export function Login() {
       const token = response.data.token
       localStorage.setItem('token', token)
 
-      navigate('/dashboard')
+      navigate('/projeto-faculdade/dashboard')
     } catch (error) {
       console.error('Erro ao fazer login:', error)
     } finally {

@@ -21,7 +21,7 @@ export function Hero() {
       </Title>
 
       <Button asChild size="4" radius="medium" color="purple">
-        <a href="/denunciar">
+        <a href="/projeto-faculdade/denunciar">
           Fazer denuncia
           <ArrowRight />
         </a>

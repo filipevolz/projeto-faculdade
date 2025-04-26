@@ -68,7 +68,7 @@ export function Address() {
     localStorage.removeItem('reportStep2')
 
     localStorage.setItem('reportStep2', JSON.stringify(data))
-    await navigate('/denunciar/endereco/descricao')
+    await navigate('/projeto-faculdade/denunciar/endereco/descricao')
   }
 
   return (

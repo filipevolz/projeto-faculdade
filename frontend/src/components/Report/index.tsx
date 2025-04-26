@@ -56,7 +56,7 @@ export function Report() {
         color="purple"
         style={{ marginTop: '2rem' }}
       >
-        <a href="/denunciar">
+        <a href="/projeto-faculdade/denunciar">
           Registrar Denúncia
           <ArrowRight />
         </a>

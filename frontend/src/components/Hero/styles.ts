@@ -8,7 +8,7 @@ export const HeroContainer = styled.div`
   justify-content: center;
   text-align: center;
 
-  background-image: url('/src/assets/preview.jpg');
+  background-image: url('/projeto-faculdade/preview.jpg');
   background-size: cover;
   background-position: center;
 

@@ -62,7 +62,7 @@ export function Description() {
       localStorage.removeItem('reportStep2')
       setMessageSuccess("Denúncia criada com sucesso!")
       setTimeout(() => {
-        navigate('/')
+        navigate('/projeto-faculdade')
       }, 3000)
     } catch (error) {
       console.error('Erro ao enviar denúncia:', error)
