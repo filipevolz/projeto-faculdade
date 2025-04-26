@@ -15,6 +15,8 @@ export function Header() {
     return () => window.removeEventListener('hashchange', onHashChange)
   }, [])
 
+  console.log(pathname)
+
   return (
     <HeaderContainer
       style={{
