@@ -15,14 +15,8 @@ export function Header() {
     return () => window.removeEventListener('hashchange', onHashChange)
   }, [])
 
-  console.log(pathname)
-
   return (
-    <HeaderContainer
-      style={{
-        justifyContent: pathname !== '/projeto-faculdade/' || '/projeto-faculdade' ? 'center' : 'justify-between',
-      }}
-    >
+    <HeaderContainer>
       <Logo>
         <LogoIcon size={70} />
         <span>
